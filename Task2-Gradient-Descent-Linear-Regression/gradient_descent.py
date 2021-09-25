@@ -10,6 +10,18 @@ with open('dataset.csv') as file:
             x.append(float(i))
             y.append(float(j))
 
+m = len(x)
+alpha = 0.005
+theta = [1,1]
+h = [None]*m
+for i in range(m):
+    h[i] = theta[0] + theta[1] * x[i]
+    theta[0] = theta[0] - ((alpha / m) * (h[i] - y[i]))
+    theta[1] = theta[1] - (((alpha / m) * (h[i] - y[i]))*x[i])
+for j in range(len(x)):
+    hyp = theta[0] + theta[1] * x[j]
+    plt.plot(x[j],hyp,"x")
+# print(theta)
 plt.plot(x, y, "o")
 plt.xlabel("X")
 plt.ylabel("Y")
